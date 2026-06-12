@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jack Bell</title>
+  <meta name="description" content="Software engineer. .NET, TypeScript, MAUI, SQL, Azure Pipelines." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --text-primary: #1a1a18;
+      --text-secondary: #5f5e5a;
+      --text-tertiary: #b4b2a9;
+      --border: rgba(26, 26, 24, 0.12);
+      --border-strong: rgba(26, 26, 24, 0.25);
+      --bg: #fafaf8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-primary: #f0eeea;
+        --text-secondary: #888780;
+        --text-tertiary: #5f5e5a;
+        --border: rgba(240, 238, 234, 0.1);
+        --border-strong: rgba(240, 238, 234, 0.22);
+        --bg: #141412;
+      }
+    }
+
+    html {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+
+    main {
+      width: 100%;
+      max-width: 640px;
+    }
+
+    /* Header */
+    header {
+      padding: 3.5rem 0 2.5rem;
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .name {
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: clamp(22px, 4vw, 28px);
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .role {
+      font-size: 12px;
+      color: var(--text-secondary);
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    /* Intro */
+    .intro {
+      padding: 2.5rem 0 2.25rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .intro p {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-primary);
+      max-width: 500px;
+    }
+
+    .intro strong {
+      font-weight: 500;
+    }
+
+    /* Stack */
+    .stack {
+      padding: 2rem 0 2rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 1.25rem;
+      font-weight: 400;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      font-weight: 300;
+      padding: 5px 12px;
+      border: 0.5px solid var(--border);
+      border-radius: 3px;
+      color: var(--text-secondary);
+      background: transparent;
+      letter-spacing: 0.01em;
+    }
+
+    .chip.accent {
+      border-color: var(--border-strong);
+      color: var(--text-primary);
+    }
+
+    /* Footer */
+    footer {
+      padding: 1.75rem 0 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s ease;
+    }
+
+    .contact-link:hover {
+      color: var(--text-primary);
+    }
+
+    .contact-link:focus-visible {
+      outline: 2px solid var(--text-secondary);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .contact-link svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .years {
+      margin-left: auto;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-tertiary);
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding-top: 2.5rem;
+      }
+      .years {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .contact-link {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="name">jack bell</span>
+      <span class="role">Software Engineer</span>
+    </header>
+
+    <section class="intro" aria-label="About">
+      <p>
+        I build software across the full stack - from <strong>.NET</strong> and <strong>SQL</strong>
+        through to <strong>TypeScript</strong> and cross-platform apps with <strong>MAUI</strong>.
+        Equally at home on Windows or Linux, shipping via <strong>Azure Pipelines</strong>.
+      </p>
+    </section>
+
+    <section class="stack" aria-label="Stack">
+      <p class="section-label">Stack</p>
+      <div class="chips">
+        <span class="chip accent">.NET / C#</span>
+        <span class="chip accent">TypeScript</span>
+        <span class="chip accent">MAUI</span>
+        <span class="chip accent">SQL</span>
+        <span class="chip">Azure Pipelines</span>
+        <span class="chip">Windows</span>
+        <span class="chip">Linux</span>
+      </div>
+    </section>
+
+    <footer>
+      <a class="contact-link" href="https://github.com/jb-2893" aria-label="GitHub profile">
+        <!-- GitHub icon -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+        </svg>
+        GitHub
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/jack-b-0b808944" aria-label="LinkedIn profile">
+        <!-- LinkedIn icon -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+          <rect x="2" y="9" width="4" height="12"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+        LinkedIn
+      </a>
+      <span class="years">coding since 2008</span>
+    </footer>
+  </main>
+</body>
+</html>
