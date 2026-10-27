@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work · Jack Bell</title>
+  <meta name="description" content="What Jack Bell has built since 2008: Garry's Mod, Afterburst, oil and gas software, and enterprise .NET." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --text-primary: #1a1a18;
+      --text-secondary: #5f5e5a;
+      --text-tertiary: #b4b2a9;
+      --border: rgba(26, 26, 24, 0.12);
+      --border-strong: rgba(26, 26, 24, 0.25);
+      --bg: #fafaf8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-primary: #f0eeea;
+        --text-secondary: #888780;
+        --text-tertiary: #5f5e5a;
+        --border: rgba(240, 238, 234, 0.1);
+        --border-strong: rgba(240, 238, 234, 0.22);
+        --bg: #141412;
+      }
+    }
+
+    html {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+
+    main {
+      width: 100%;
+      max-width: 640px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--text-secondary);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* Header */
+    header {
+      padding: 3.5rem 0 2.5rem;
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+
+    .name {
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: clamp(22px, 4vw, 28px);
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .role {
+      font-size: 12px;
+      color: var(--text-secondary);
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    /* Intro */
+    .intro {
+      padding: 2.5rem 0 2.25rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .intro p {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 500px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 1.25rem;
+      font-weight: 400;
+    }
+
+    /* Overlap chart: years run 2008 to 2027 */
+    .spans {
+      padding: 2rem 0 2rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .span-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .span-row {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+    }
+
+    .span-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      text-decoration: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .span-label:hover {
+      color: var(--text-primary);
+    }
+
+    .track {
+      position: relative;
+      height: 6px;
+    }
+
+    .track::before {
+      content: "";
+      position: absolute;
+      inset: 2.5px 0;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .bar {
+      position: absolute;
+      top: 0;
+      height: 6px;
+      border-radius: 1px;
+      left: calc((var(--s) - 2008) / 19 * 100%);
+      width: calc((var(--e) - var(--s)) / 19 * 100%);
+      background: var(--text-tertiary);
+    }
+
+    .bar.now {
+      background: var(--text-primary);
+    }
+
+    .axis {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .ticks {
+      position: relative;
+      height: 14px;
+    }
+
+    .ticks span {
+      position: absolute;
+      left: calc((var(--y) - 2008) / 19 * 100%);
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 300;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+    }
+
+    /* Entries */
+    .entry {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 12px;
+      padding: 2rem 0;
+      border-bottom: 0.5px solid var(--border);
+      scroll-margin-top: 1.5rem;
+    }
+
+    .when {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+      padding-top: 1px;
+    }
+
+    .entry h2 {
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .where {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .entry p,
+    .entry li {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .entry p {
+      margin-top: 0.85rem;
+    }
+
+    .entry ul {
+      margin-top: 0.85rem;
+      list-style: none;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .entry li {
+      padding-left: 1.1rem;
+      position: relative;
+    }
+
+    .entry li::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      color: var(--text-tertiary);
+    }
+
+    .entry strong {
+      font-weight: 500;
+    }
+
+    .links {
+      margin-top: 0.85rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+
+    .links a,
+    .back {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: underline;
+      text-decoration-color: var(--border-strong);
+      text-underline-offset: 3px;
+      transition: color 0.15s ease;
+    }
+
+    .links a:hover,
+    .back:hover {
+      color: var(--text-primary);
+    }
+
+    /* Footer */
+    footer {
+      padding: 1.75rem 0 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .years {
+      margin-left: auto;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-tertiary);
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding-top: 2.5rem;
+      }
+      .span-row,
+      .axis {
+        grid-template-columns: 90px minmax(0, 1fr);
+        gap: 10px;
+      }
+      .entry {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+      .years {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .links a,
+      .back {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <a class="name" href="/">jack bell</a>
+      <span class="role">Work · 2008 – now</span>
+    </header>
+
+    <section class="intro" aria-label="About">
+      <p>
+        Self-taught first, degree second. Most of what I know started with
+        taking something apart to see how it worked.
+      </p>
+    </section>
+
+    <section class="spans" aria-label="Timeline overview">
+      <p class="section-label">Overlap</p>
+      <ul class="span-list">
+        <li class="span-row">
+          <a class="span-label" href="#gmod">Garry's Mod</a>
+          <div class="track"><span class="bar" style="--s: 2008; --e: 2011;" title="2008 – 2010"></span></div>
+        </li>
+        <li class="span-row">
+          <a class="span-label" href="#afterburst">Afterburst</a>
+          <div class="track"><span class="bar" style="--s: 2011; --e: 2026.5;" title="2011 – 2026"></span></div>
+        </li>
+        <li class="span-row">
+          <a class="span-label" href="#rgu">RGU</a>
+          <div class="track"><span class="bar" style="--s: 2011.7; --e: 2015.5;" title="2011 – 2015"></span></div>
+        </li>
+        <li class="span-row">
+          <a class="span-label" href="#internship">Zenith</a>
+          <div class="track"><span class="bar" style="--s: 2013.5; --e: 2015.6;" title="2013 – 2015"></span></div>
+        </li>
+        <li class="span-row">
+          <a class="span-label" href="#rcp">Rig Control</a>
+          <div class="track"><span class="bar" style="--s: 2015.6; --e: 2016.5;" title="2015 – 2016"></span></div>
+        </li>
+        <li class="span-row">
+          <a class="span-label" href="#infographics">Infographics</a>
+          <div class="track"><span class="bar now" style="--s: 2016.5; --e: 2026.85;" title="2016 – now"></span></div>
+        </li>
+      </ul>
+      <div class="axis" aria-hidden="true">
+        <span></span>
+        <div class="ticks">
+          <span style="--y: 2008;">2008</span>
+          <span style="--y: 2012;">2012</span>
+          <span style="--y: 2016;">2016</span>
+          <span style="--y: 2020;">2020</span>
+          <span style="--y: 2024;">2024</span>
+        </div>
+      </div>
+    </section>
+
+    <article class="entry" id="gmod">
+      <p class="when">2008 – 2010</p>
+      <div>
+        <h2>Garry's Mod</h2>
+        <p class="where">Lua scripting scene</p>
+        <p>
+          Where it started. Built server administration tooling and worked on extending
+          the Zombie Survival and Zombified World gamemodes. Also wrote and released a free,
+          open-source anticheat to help tackle cheating in the game's PvP modes.
+        </p>
+      </div>
+    </article>
+
+    <article class="entry" id="afterburst">
+      <p class="when">2011 – 2026</p>
+      <div>
+        <h2>Afterburst</h2>
+        <p class="where">Server hosting, side project</p>
+        <p>
+          Joined as a late co-founder and ran it for fifteen years alongside
+          everything else on this page.
+        </p>
+      </div>
+    </article>
+
+    <article class="entry" id="rgu">
+      <p class="when">2011 – 2015</p>
+      <div>
+        <h2>Robert Gordon University</h2>
+        <p class="where">BSc (Hons) Computer Science, first class</p>
+      </div>
+    </article>
+
+    <article class="entry" id="internship">
+      <p class="when">2013 – 2015</p>
+      <div>
+        <h2>Zenith Oilfield Technology</h2>
+        <p class="where">Software intern, Inverurie</p>
+        <p>
+          First professional software work, alongside the degree. Built internal web tooling
+          in <strong>PHP</strong>, <strong>MySQL</strong> and <strong>JavaScript</strong>, and
+          picked up embedded software along the way, writing <strong>embedded C</strong> for
+          microcontrollers.
+        </p>
+      </div>
+    </article>
+
+    <article class="entry" id="rcp">
+      <p class="when">2015 – 2016</p>
+      <div>
+        <h2>Rig Control Products</h2>
+        <p class="where">Graduate software engineer, Aberdeen</p>
+        <p>
+          Built the <strong>BOP E-Logger</strong> from a blank page: a greenfield system displaying
+          data acquired from <strong>Siemens PLCs</strong>, deployed on a Norwegian drilling
+          company's rig. Written in <strong>C#</strong>, <strong>PHP</strong>,
+          <strong>MySQL</strong>, <strong>JavaScript</strong> and <strong>HTML</strong>.
+        </p>
+        <div class="links">
+          <a href="https://www.pressandjournal.co.uk/fp/news/646308/meet-graduate-learning-vital-skills-software-development/">Press and Journal article</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="entry" id="infographics">
+      <p class="when">2016 – now</p>
+      <div>
+        <h2>Infographics UK</h2>
+        <p class="where">Senior software engineer, Edinburgh / remote</p>
+        <p>
+          Moved out of oil and gas into enterprise software. Full-stack work on the
+          <strong>Prevent + Protect</strong> and <strong>FloSuite</strong> products.
+        </p>
+        <ul>
+          <li>Designed and built a domain-specific language: an offline-capable, reactive, rules-driven questionnaire engine with versioning and a visual design tool, used mainly by fire and rescue services.</li>
+          <li>Designed and built the office-js integration between our products and Microsoft Office.</li>
+          <li>Built shared services that products across the group plug into for email, calendar and file storage, either native or cloud through Azure and Microsoft Graph.</li>
+          <li>Created and maintain the Azure DevOps build pipelines.</li>
+          <li>Review code across the team, from juniors to the team lead, and mentor junior developers.</li>
+        </ul>
+      </div>
+    </article>
+
+    <footer>
+      <a class="back" href="/">← Back</a>
+      <span class="years">building and breaking things since 2008</span>
+    </footer>
+  </main>
+</body>
+</html>
