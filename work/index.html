@@ -17,6 +17,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jack Bell",
+    "url": "https://jack-bell.co.uk/",
+    "jobTitle": "Senior Software Engineer",
+    "homeLocation": { "@type": "Place", "name": "Inverness, Scotland" },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Robert Gordon University",
+      "address": "Aberdeen, Scotland"
+    },
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "name": "BSc (Hons) Computer Science, first class",
+      "credentialCategory": "Bachelor's degree",
+      "educationalLevel": "Bachelor's degree with honours (SCQF level 10)",
+      "recognizedBy": { "@type": "CollegeOrUniversity", "name": "Robert Gordon University" }
+    },
+    "sameAs": [
+      "https://github.com/jb-2893",
+      "https://www.linkedin.com/in/jack-b-0b808944"
+    ]
+  }
+  </script>
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -415,8 +441,14 @@
         <p class="where">Server hosting, side project</p>
         <p>
           Joined as a late co-founder and ran it for fifteen years alongside
-          everything else on this page.
+          everything else on this page. VPS hosting on <strong>OpenVZ</strong>, and later
+          entirely on <strong>KVM</strong>.
         </p>
+        <ul>
+          <li>Designed and ran the infrastructure fleet day to day, and handled a large share of customer support.</li>
+          <li>Automated deployments with <strong>pyinfra</strong>.</li>
+          <li>Automated security and uptime with <strong>iptables</strong> and <strong>Bash</strong> scripts, alerting through <strong>Mailgun</strong> and <strong>Pushover</strong>, and monitoring with <strong>NodePing</strong>.</li>
+        </ul>
       </div>
     </article>
 
@@ -424,7 +456,7 @@
       <p class="when">2011 – 2015</p>
       <div>
         <h2>Robert Gordon University</h2>
-        <p class="where">BSc (Hons) Computer Science, first class</p>
+        <p class="where">BSc (Hons) Computer Science, first class, Aberdeen</p>
       </div>
     </article>
 
@@ -466,13 +498,15 @@
         <p class="where">Senior software engineer, Edinburgh / remote</p>
         <p>
           Moved out of oil and gas into enterprise software. Full-stack work on the
-          <strong>Prevent + Protect</strong> and <strong>FloSuite</strong> products.
+          <strong>Prevent + Protect</strong> and <strong>FloSuite</strong> products, mostly in
+          <strong>.NET / C#</strong>, <strong>SQL Server</strong> and <strong>TypeScript</strong>,
+          with some <strong>MAUI</strong>.
         </p>
         <ul>
           <li>Designed and built a domain-specific language: an offline-capable, reactive, rules-driven questionnaire engine with versioning and a visual design tool, used mainly by fire and rescue services.</li>
-          <li>Designed and built the office-js integration between our products and Microsoft Office.</li>
-          <li>Built shared services that products across the group plug into for email, calendar and file storage, either native or cloud through Azure and Microsoft Graph.</li>
-          <li>Created and maintain the Azure DevOps build pipelines.</li>
+          <li>Designed and built the <strong>office-js</strong> integration between our products and Microsoft Office, in TypeScript and <strong>React</strong>.</li>
+          <li>Built internal <strong>NuGet</strong> packages providing shared file storage, email and calendar abstractions for products across the group. Plugins for the native file system, SMTP and Azure / Microsoft Graph let each system choose its implementation through configuration.</li>
+          <li>Created and maintain the <strong>Azure DevOps</strong> build pipelines.</li>
           <li>Review code across the team, from juniors to the team lead, and mentor junior developers.</li>
         </ul>
       </div>
