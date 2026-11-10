@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
   <title>Jack Bell</title>
-  <meta name="description" content="Senior software engineer in Inverness, Scotland. .NET, TypeScript, MAUI, SQL, Azure Pipelines." />
+  <meta name="description" content="Senior software engineer in Inverness, Scotland. .NET, SQL Server, TypeScript, Azure DevOps." />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="canonical" href="https://jack-bell.co.uk/" />
   <meta property="og:type" content="website" />
@@ -12,12 +13,53 @@
   <meta property="og:locale" content="en_GB" />
   <meta property="og:url" content="https://jack-bell.co.uk/" />
   <meta property="og:title" content="Jack Bell" />
-  <meta property="og:description" content="Senior software engineer in Inverness, Scotland. .NET, TypeScript, MAUI, SQL, Azure Pipelines." />
+  <meta property="og:description" content="Senior software engineer in Inverness, Scotland. .NET, SQL Server, TypeScript, Azure DevOps." />
   <meta name="twitter:card" content="summary" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/dm-mono-300.woff2" as="font" type="font/woff2" crossorigin />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jack Bell",
+    "url": "https://jack-bell.co.uk/",
+    "jobTitle": "Senior Software Engineer",
+    "homeLocation": { "@type": "Place", "name": "Inverness, Scotland" },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Robert Gordon University",
+      "address": "Aberdeen, Scotland"
+    },
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "name": "BSc (Hons) Computer Science, first class",
+      "credentialCategory": "Bachelor's degree",
+      "educationalLevel": "Bachelor's degree with honours (SCQF level 10)",
+      "recognizedBy": { "@type": "CollegeOrUniversity", "name": "Robert Gordon University" }
+    },
+    "sameAs": [
+      "https://github.com/jb-2893",
+      "https://www.linkedin.com/in/jack-b-0b808944"
+    ]
+  }
+  </script>
   <style>
+    @font-face {
+      font-family: 'DM Sans';
+      src: url('/fonts/dm-sans.woff2') format('woff2');
+      font-weight: 100 1000;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'DM Mono';
+      src: url('/fonts/dm-mono-300.woff2') format('woff2');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -28,8 +70,9 @@
       --text-primary: #1a1a18;
       --text-secondary: #4f4e4a;
       --text-tertiary: #73726c;
-      --border: rgba(26, 26, 24, 0.12);
-      --border-strong: rgba(26, 26, 24, 0.25);
+      --border: rgba(26, 26, 24, 0.09);
+      --border-strong: rgba(26, 26, 24, 0.2);
+      --underline: rgba(26, 26, 24, 0.25);
       --bg: #fafaf8;
     }
 
@@ -38,8 +81,9 @@
         --text-primary: #f0eeea;
         --text-secondary: #aaa9a2;
         --text-tertiary: #85847e;
-        --border: rgba(240, 238, 234, 0.1);
-        --border-strong: rgba(240, 238, 234, 0.22);
+        --border: rgba(240, 238, 234, 0.08);
+        --border-strong: rgba(240, 238, 234, 0.18);
+        --underline: rgba(240, 238, 234, 0.22);
         --bg: #141412;
       }
     }
@@ -68,7 +112,7 @@
     /* Header */
     header {
       padding: 3.5rem 0 2.5rem;
-      border-bottom: 0.5px solid var(--border);
+      border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
@@ -93,7 +137,7 @@
     /* Intro */
     .intro {
       padding: 2.5rem 0 2.25rem;
-      border-bottom: 0.5px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .intro p {
@@ -111,7 +155,7 @@
     /* Stack */
     .stack {
       padding: 2rem 0 2rem;
-      border-bottom: 0.5px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .section-label {
@@ -134,11 +178,16 @@
       font-size: 12px;
       font-weight: 300;
       padding: 5px 12px;
-      border: 0.5px solid var(--border);
+      border: 1px solid var(--border);
       border-radius: 3px;
       color: var(--text-secondary);
       background: transparent;
       letter-spacing: 0.01em;
+    }
+
+    .chip-break {
+      flex-basis: 100%;
+      height: 0;
     }
 
     .chip.accent {
@@ -194,7 +243,7 @@
       color: var(--text-tertiary);
       letter-spacing: 0.05em;
       text-decoration: underline;
-      text-decoration-color: var(--border-strong);
+      text-decoration-color: var(--underline);
       text-underline-offset: 3px;
       transition: color 0.15s ease;
     }
@@ -240,7 +289,7 @@
 <body>
   <main>
     <header>
-      <span class="name">jack bell</span>
+      <h1 class="name">jack bell</h1>
       <span class="role">Senior Software Engineer<span class="sep"> · </span><span class="loc">Inverness, Scotland</span></span>
     </header>
 
@@ -252,12 +301,14 @@
       <p class="section-label">Stack</p>
       <div class="chips">
         <span class="chip accent">.NET / C#</span>
+        <span class="chip accent">SQL Server</span>
         <span class="chip accent">TypeScript</span>
-        <span class="chip accent">MAUI</span>
-        <span class="chip accent">SQL</span>
-        <span class="chip">Azure Pipelines</span>
-        <span class="chip">Windows</span>
+        <span class="chip-break" aria-hidden="true"></span>
+        <span class="chip">React</span>
+        <span class="chip">MAUI</span>
+        <span class="chip">Azure DevOps</span>
         <span class="chip">Linux</span>
+        <span class="chip">Windows</span>
       </div>
     </section>
 

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Page not found · Jack Bell</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/dm-mono-300.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face {
+      font-family: 'DM Sans';
+      src: url('/fonts/dm-sans.woff2') format('woff2');
+      font-weight: 100 1000;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'DM Mono';
+      src: url('/fonts/dm-mono-300.woff2') format('woff2');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --text-primary: #1a1a18;
+      --text-secondary: #4f4e4a;
+      --text-tertiary: #73726c;
+      --border: rgba(26, 26, 24, 0.09);
+      --border-strong: rgba(26, 26, 24, 0.2);
+      --underline: rgba(26, 26, 24, 0.25);
+      --bg: #fafaf8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-primary: #f0eeea;
+        --text-secondary: #aaa9a2;
+        --text-tertiary: #85847e;
+        --border: rgba(240, 238, 234, 0.08);
+        --border-strong: rgba(240, 238, 234, 0.18);
+        --underline: rgba(240, 238, 234, 0.22);
+        --bg: #141412;
+      }
+    }
+
+    html {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+
+    main {
+      width: 100%;
+      max-width: 640px;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--text-secondary);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    header {
+      padding: 3.5rem 0 2.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+
+    .name {
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: clamp(22px, 4vw, 28px);
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .role {
+      font-size: 12px;
+      color: var(--text-secondary);
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .intro {
+      padding: 2.5rem 0 2.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .intro p {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 500px;
+    }
+
+    footer {
+      padding: 1.75rem 0 3.5rem;
+      display: flex;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: underline;
+      text-decoration-color: var(--underline);
+      text-underline-offset: 3px;
+    }
+
+    footer a:hover {
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding-top: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <a class="name" href="/">jack bell</a>
+      <h1 class="role">404 · Page not found</h1>
+    </header>
+
+    <section class="intro">
+      <p>There's nothing at this address. It may have moved, or the link may be wrong.</p>
+    </section>
+
+    <footer>
+      <a href="/">Home</a>
+      <a href="/work/">Work</a>
+    </footer>
+  </main>
+</body>
+</html>

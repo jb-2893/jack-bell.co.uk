@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
   <title>Work · Jack Bell</title>
   <meta name="description" content="What Jack Bell has built since 2008: Garry's Mod, Afterburst, oil and gas software, and enterprise .NET." />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -14,9 +15,8 @@
   <meta property="og:title" content="Work · Jack Bell" />
   <meta property="og:description" content="What Jack Bell has built since 2008: Garry's Mod, Afterburst, oil and gas software, and enterprise .NET." />
   <meta name="twitter:card" content="summary" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/dm-mono-300.woff2" as="font" type="font/woff2" crossorigin />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -44,6 +44,22 @@
   }
   </script>
   <style>
+    @font-face {
+      font-family: 'DM Sans';
+      src: url('/fonts/dm-sans.woff2') format('woff2');
+      font-weight: 100 1000;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'DM Mono';
+      src: url('/fonts/dm-mono-300.woff2') format('woff2');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -54,8 +70,9 @@
       --text-primary: #1a1a18;
       --text-secondary: #4f4e4a;
       --text-tertiary: #73726c;
-      --border: rgba(26, 26, 24, 0.12);
-      --border-strong: rgba(26, 26, 24, 0.25);
+      --border: rgba(26, 26, 24, 0.09);
+      --border-strong: rgba(26, 26, 24, 0.2);
+      --underline: rgba(26, 26, 24, 0.25);
       --bg: #fafaf8;
     }
 
@@ -64,8 +81,9 @@
         --text-primary: #f0eeea;
         --text-secondary: #aaa9a2;
         --text-tertiary: #85847e;
-        --border: rgba(240, 238, 234, 0.1);
-        --border-strong: rgba(240, 238, 234, 0.22);
+        --border: rgba(240, 238, 234, 0.08);
+        --border-strong: rgba(240, 238, 234, 0.18);
+        --underline: rgba(240, 238, 234, 0.22);
         --bg: #141412;
       }
     }
@@ -104,7 +122,7 @@
     /* Header */
     header {
       padding: 3.5rem 0 2.5rem;
-      border-bottom: 0.5px solid var(--border);
+      border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
@@ -131,7 +149,7 @@
     /* Intro */
     .intro {
       padding: 2.5rem 0 2.25rem;
-      border-bottom: 0.5px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .intro p {
@@ -153,7 +171,7 @@
     /* Overlap chart: years run 2008 to 2027 */
     .spans {
       padding: 2rem 0 2rem;
-      border-bottom: 0.5px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .span-list {
@@ -192,8 +210,8 @@
     .track::before {
       content: "";
       position: absolute;
-      inset: 2.5px 0;
-      border-top: 0.5px solid var(--border);
+      inset: 2.5px 0 auto;
+      border-top: 1px solid var(--border);
     }
 
     .bar {
@@ -201,13 +219,17 @@
       top: 0;
       height: 6px;
       border-radius: 1px;
-      left: calc((var(--s) - 2008) / 19 * 100%);
-      width: calc((var(--e) - var(--s)) / 19 * 100%);
+      left: calc((var(--s) - 2008) / 22 * 100%);
+      width: calc((var(--e) - var(--s)) / 22 * 100%);
       background: var(--text-tertiary);
     }
 
     .bar.now {
       background: var(--text-primary);
+    }
+
+    .bar.next {
+      background: repeating-linear-gradient(90deg, var(--text-primary) 0 5px, transparent 5px 8px);
     }
 
     .axis {
@@ -224,12 +246,17 @@
 
     .ticks span {
       position: absolute;
-      left: calc((var(--y) - 2008) / 19 * 100%);
+      left: calc((var(--y) - 2008) / 22 * 100%);
       font-family: 'DM Mono', monospace;
       font-size: 10px;
       font-weight: 300;
       color: var(--text-tertiary);
       letter-spacing: 0.04em;
+      transform: translateX(-50%);
+    }
+
+    .ticks span:last-child {
+      transform: translateX(-100%);
     }
 
     /* Entries */
@@ -238,17 +265,18 @@
       grid-template-columns: 110px minmax(0, 1fr);
       gap: 12px;
       padding: 2rem 0;
-      border-bottom: 0.5px solid var(--border);
+      border-bottom: 1px solid var(--border);
       scroll-margin-top: 1.5rem;
     }
 
-    .when {
+    .entry .when {
       font-family: 'DM Mono', monospace;
       font-size: 12px;
       font-weight: 300;
       color: var(--text-secondary);
       letter-spacing: 0.02em;
-      padding-top: 1px;
+      padding-top: 3px;
+      margin-top: 0;
     }
 
     .entry h2 {
@@ -309,7 +337,7 @@
       font-size: 13px;
       color: var(--text-secondary);
       text-decoration: underline;
-      text-decoration-color: var(--border-strong);
+      text-decoration-color: var(--underline);
       text-underline-offset: 3px;
       transition: color 0.15s ease;
     }
@@ -359,6 +387,12 @@
       }
     }
 
+    @media (max-width: 360px) {
+      .ticks .minor {
+        display: none;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .links a,
       .back {
@@ -371,7 +405,7 @@
   <main>
     <header>
       <a class="name" href="/">jack bell</a>
-      <span class="role">Work · 2008 – now</span>
+      <h1 class="role">Work · 2008 – now</h1>
     </header>
 
     <section class="intro" aria-label="About">
@@ -382,7 +416,7 @@
     </section>
 
     <section class="spans" aria-label="Timeline overview">
-      <p class="section-label">Overlap</p>
+      <p class="section-label">Timeline</p>
       <ul class="span-list">
         <li class="span-row">
           <a class="span-label" href="#gmod">Garry's Mod</a>
@@ -406,31 +440,52 @@
         </li>
         <li class="span-row">
           <a class="span-label" href="#infographics">Infographics</a>
-          <div class="track"><span class="bar now" style="--s: 2016.5; --e: 2026.85;" title="2016 – now"></span></div>
+          <div class="track"><span class="bar now" style="--s: 2016.5; --e: 2027.17;" title="2016 – February 2027"></span></div>
+        </li>
+        <li class="span-row">
+          <a class="span-label" href="#next">Energy tech</a>
+          <div class="track"><span class="bar next" style="--s: 2027.17; --e: 2030;" title="From February 2027"></span></div>
         </li>
       </ul>
       <div class="axis" aria-hidden="true">
         <span></span>
         <div class="ticks">
-          <span style="--y: 2008;">2008</span>
-          <span style="--y: 2012;">2012</span>
-          <span style="--y: 2016;">2016</span>
+          <span style="--y: 2010;">2010</span>
+          <span class="minor" style="--y: 2015;">2015</span>
           <span style="--y: 2020;">2020</span>
-          <span style="--y: 2024;">2024</span>
+          <span class="minor" style="--y: 2025;">2025</span>
+          <span style="--y: 2030;">2030</span>
         </div>
       </div>
     </section>
 
-    <article class="entry" id="gmod">
-      <p class="when">2008 – 2010</p>
+    <article class="entry" id="next">
+      <p class="when">Feb 2027 –</p>
       <div>
-        <h2>Garry's Mod</h2>
-        <p class="where">Lua scripting scene</p>
+        <h2>What's next</h2>
+        <p class="where">Energy technology</p>
+        <p>Starting an exciting new challenge in the energy technology sector.</p>
+      </div>
+    </article>
+
+    <article class="entry" id="infographics">
+      <p class="when">2016 – 2027</p>
+      <div>
+        <h2>Infographics UK</h2>
+        <p class="where">Senior software engineer, Edinburgh / remote</p>
         <p>
-          Where it started. Built server administration tooling and worked on extending
-          the Zombie Survival and Zombified World gamemodes. Also wrote and released a free,
-          open-source anticheat to help tackle cheating in the game's PvP modes.
+          Moved out of oil and gas into enterprise software. Full-stack work on the
+          <strong>Prevent + Protect</strong> and <strong>FloSuite</strong> products, mostly in
+          <strong>.NET / C#</strong>, <strong>SQL Server</strong> and <strong>TypeScript</strong>,
+          with some <strong>MAUI</strong>.
         </p>
+        <ul>
+          <li>Designed and built a domain-specific language: an offline-capable, reactive, rules-driven questionnaire engine with versioning and a visual design tool, used mainly by fire and rescue services.</li>
+          <li>Designed and built the <strong>office-js</strong> integration between our products and Microsoft Office, in TypeScript and <strong>React</strong>.</li>
+          <li>Built internal <strong>NuGet</strong> packages providing shared file storage, email and calendar abstractions for products across the group. Plugins for the native file system, SMTP and Azure / Microsoft Graph let each system choose its implementation through configuration.</li>
+          <li>Created and maintain the <strong>Azure DevOps</strong> build pipelines.</li>
+          <li>Review code across the team, from juniors to the team lead, and mentor junior developers.</li>
+        </ul>
       </div>
     </article>
 
@@ -441,7 +496,7 @@
         <p class="where">Server hosting, side project</p>
         <p>
           Joined as a late co-founder and ran it for fifteen years alongside
-          everything else on this page. VPS hosting on <strong>OpenVZ</strong>, and later
+          university and my day jobs. VPS hosting on <strong>OpenVZ</strong>, and later
           entirely on <strong>KVM</strong>.
         </p>
         <ul>
@@ -449,28 +504,6 @@
           <li>Automated deployments with <strong>pyinfra</strong>.</li>
           <li>Automated security and uptime with <strong>iptables</strong> and <strong>Bash</strong> scripts, alerting through <strong>Mailgun</strong> and <strong>Pushover</strong>, and monitoring with <strong>NodePing</strong>.</li>
         </ul>
-      </div>
-    </article>
-
-    <article class="entry" id="rgu">
-      <p class="when">2011 – 2015</p>
-      <div>
-        <h2>Robert Gordon University</h2>
-        <p class="where">BSc (Hons) Computer Science, first class, Aberdeen</p>
-      </div>
-    </article>
-
-    <article class="entry" id="internship">
-      <p class="when">2013 – 2015</p>
-      <div>
-        <h2>Zenith Oilfield Technology</h2>
-        <p class="where">Software intern, Inverurie</p>
-        <p>
-          First professional software work, alongside the degree. Built internal web tooling
-          in <strong>PHP</strong>, <strong>MySQL</strong> and <strong>JavaScript</strong>, and
-          picked up embedded software along the way, writing <strong>embedded C</strong> for
-          microcontrollers.
-        </p>
       </div>
     </article>
 
@@ -491,24 +524,38 @@
       </div>
     </article>
 
-    <article class="entry" id="infographics">
-      <p class="when">2016 – now</p>
+    <article class="entry" id="internship">
+      <p class="when">2013 – 2015</p>
       <div>
-        <h2>Infographics UK</h2>
-        <p class="where">Senior software engineer, Edinburgh / remote</p>
+        <h2>Zenith Oilfield Technology</h2>
+        <p class="where">Software intern, Inverurie</p>
         <p>
-          Moved out of oil and gas into enterprise software. Full-stack work on the
-          <strong>Prevent + Protect</strong> and <strong>FloSuite</strong> products, mostly in
-          <strong>.NET / C#</strong>, <strong>SQL Server</strong> and <strong>TypeScript</strong>,
-          with some <strong>MAUI</strong>.
+          First professional software work, alongside the degree. Built internal web tooling
+          in <strong>PHP</strong>, <strong>MySQL</strong> and <strong>JavaScript</strong>, and
+          picked up embedded software along the way, writing <strong>embedded C</strong> for
+          microcontrollers.
         </p>
-        <ul>
-          <li>Designed and built a domain-specific language: an offline-capable, reactive, rules-driven questionnaire engine with versioning and a visual design tool, used mainly by fire and rescue services.</li>
-          <li>Designed and built the <strong>office-js</strong> integration between our products and Microsoft Office, in TypeScript and <strong>React</strong>.</li>
-          <li>Built internal <strong>NuGet</strong> packages providing shared file storage, email and calendar abstractions for products across the group. Plugins for the native file system, SMTP and Azure / Microsoft Graph let each system choose its implementation through configuration.</li>
-          <li>Created and maintain the <strong>Azure DevOps</strong> build pipelines.</li>
-          <li>Review code across the team, from juniors to the team lead, and mentor junior developers.</li>
-        </ul>
+      </div>
+    </article>
+
+    <article class="entry" id="rgu">
+      <p class="when">2011 – 2015</p>
+      <div>
+        <h2>Robert Gordon University</h2>
+        <p class="where">BSc (Hons) Computer Science, first class, Aberdeen</p>
+      </div>
+    </article>
+
+    <article class="entry" id="gmod">
+      <p class="when">2008 – 2010</p>
+      <div>
+        <h2>Garry's Mod</h2>
+        <p class="where">Lua scripting scene</p>
+        <p>
+          Where it started. Built server administration tooling and worked on extending
+          the Zombie Survival and Zombified World gamemodes. Also wrote and released a free,
+          open-source anticheat to help tackle cheating in the game's PvP modes.
+        </p>
       </div>
     </article>
 
